@@ -1,0 +1,9 @@
+# ANSI colour codes
+BOLD = "\033[1m"
+RESET_BOLD = "\033[0m"
+GREEN = "\033[32m"
+PINK = "\033[35;1m"
+YELLOW = "\033[33m"
+RESET_COLOUR = "\033[39m"
+HYPERLINK_START = "\033]8;;"
+HYPERLINK_END = "\033\\"
