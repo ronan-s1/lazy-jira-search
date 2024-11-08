@@ -38,7 +38,7 @@ lazy -t 2w -s -f
     pip install -r requirements.txt
     ```
 
-2. Install fzf (on mac)
+2. Install [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation) (on mac)
     ```
     brew install fzf
     ```
