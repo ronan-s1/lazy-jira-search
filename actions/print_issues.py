@@ -13,11 +13,11 @@ from actions import (
 )
 
 
-def print_issues(server_url: str, issues: List[Issue], verbose: bool = False) -> None:
+def print_issues(jira_server: str, issues: List[Issue], verbose: bool = False) -> None:
     """Display user"s issues with clickable, green-coloured keys."""
     print_str = ""
     for issue in issues:
-        issue_url = f"{server_url}/browse/{issue.key}"
+        issue_url = f"{jira_server}/browse/{issue.key}"
         clickable_key = (
             f"{BOLD}{HYPERLINK_START}{issue_url}{HYPERLINK_END}"
             f"{GREEN}{issue.key}{RESET_COLOUR}"

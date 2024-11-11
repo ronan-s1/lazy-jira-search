@@ -10,17 +10,15 @@ from actions.select_issue_with_fzf import select_issue_with_fzf
 ENV_FILE_PATH = os.path.join(os.path.dirname(__file__), ".env")
 
 
-def get_jira_client() -> JIRA:
+def get_jira_client(jira_server: str) -> JIRA:
     """Initialise and return the JIRA client."""
-    SERVER = os.getenv("JIRA_SERVER")
-    API_TOKEN = os.getenv("API_TOKEN")
-    return JIRA(options={"server": SERVER}, token_auth=API_TOKEN)
+    return JIRA(options={"server": jira_server}, token_auth=os.getenv("API_TOKEN"))
 
 
 def main() -> None:
     # Load environment vars
     load_dotenv(ENV_FILE_PATH)
-    server_url = os.getenv("JIRA_SERVER")
+    jira_server = os.getenv("JIRA_SERVER")
 
     # Parse arguments
     parser = argparse.ArgumentParser()
@@ -49,7 +47,7 @@ def main() -> None:
     args = parser.parse_args()
 
     # Initialise JIRA client
-    jira_client = get_jira_client()
+    jira_client = get_jira_client(jira_server=jira_server)
 
     # Fetch issues
     issues = fetch_issues(
@@ -63,9 +61,9 @@ def main() -> None:
 
     # Display issues or select with fzf
     if args.fzf:
-        select_issue_with_fzf(server_url=server_url, issues=issues)
+        select_issue_with_fzf(jira_server=jira_server, issues=issues)
     else:
-        print_issues(server_url=server_url, issues=issues, verbose=args.verbose)
+        print_issues(jira_server=jira_server, issues=issues, verbose=args.verbose)
 
 
 if __name__ == "__main__":

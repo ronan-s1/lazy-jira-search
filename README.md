@@ -48,12 +48,12 @@ lazy -t 2w -s -f
     eval "$(fzf --bash)"
     ```
 
-4. If zsh, add this to your `~/.zshrc`:
+   If zsh, add this to your `~/.zshrc`:
     ```bash
     source <(fzf --zsh)
     ```
 
-5. create `.env` (see `.env.example`)
+4. create `.env` (see `.env.example`)
     ```
     API_TOKEN=<PAT>
     JIRA_SERVER=<JIRA_SERVER>
