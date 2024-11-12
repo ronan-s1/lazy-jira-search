@@ -7,13 +7,22 @@ Sometimes I forget what tickets I have, especially if they're across different b
 Also Jira's UI is just painfully slow, lots of clicking around, lots of waiting, lots time wasted and I am lazy so I ain't doin allat. I'm not sure how useful this will even be but shall see.
 
 ## Usage
+By default (passing no arguments), you will see all unresolved Jira issues assigned to you. You can change this behaviour by passing in different arguments shown below.
+
+### Arguments
 `-f, --fzf`: Pipe output to fzf for interactive selection.
+
+`-a, --all`: Display all issues assigned to you.
 
 `-t, --time`: Filter issues updated in the last x amount of time. Supported units: d (days), w (weeks), m (months).
 
 `-s, --sort`: Sort issues by last updated time in descending order.
 
-`-r, --resolved`: Fetch tickets already resolved.
+`-as, --assignee`: Filter issues by specified assignee.
+
+`-rep, --reporter`: Filter issues by the specified reporter; defaults to you if no value is provided.
+
+`-r, --resolved`: Display issues already resolved.
 
 `-v, --verbose`: Enable verbose output.
 

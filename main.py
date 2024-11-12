@@ -44,10 +44,30 @@ def main() -> None:
     parser.add_argument(
         "-a", "--all", action="store_true", help="Fetch all issues ever assigned to you"
     )
+    parser.add_argument(
+        "--assignee",
+        "-as",
+        type=str,
+        help="Specify an assignee username to filter issues assigned to them",
+    )
+    parser.add_argument(
+        "--reporter",
+        "-rep",
+        nargs="?",
+        const=True,
+        help="Specify a reporter username to filter issues reported by them; defaults to current user if flag is used without a value",
+    )
     args = parser.parse_args()
 
     # Initialise JIRA client
     jira_client = get_jira_client(jira_server=jira_server)
+
+    # Determine reporter value
+    reporter = (
+        args.reporter
+        if isinstance(args.reporter, str)
+        else (jira_client.current_user() if args.reporter else None)
+    )
 
     # Fetch issues
     issues = fetch_issues(
@@ -57,6 +77,8 @@ def main() -> None:
         resolved=args.resolved,
         verbose=args.verbose,
         all_issues=args.all,
+        assignee=args.assignee,
+        reporter=reporter,
     )
 
     # Display issues or select with fzf
