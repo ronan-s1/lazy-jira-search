@@ -45,14 +45,14 @@ def main() -> None:
         "-a", "--all", action="store_true", help="Fetch all issues ever assigned to you"
     )
     parser.add_argument(
-        "--assignee",
         "-as",
+        "--assignee",
         type=str,
         help="Specify an assignee username to filter issues assigned to them",
     )
     parser.add_argument(
-        "--reporter",
         "-rep",
+        "--reporter",
         nargs="?",
         const=True,
         help="Specify a reporter username to filter issues reported by them; defaults to current user if flag is used without a value",
