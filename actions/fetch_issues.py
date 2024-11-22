@@ -22,7 +22,8 @@ def fetch_issues(
     """Fetch issues based on arguments passed."""
     # Default assignee to current user if not specified
     current_user = jira_client.current_user()
-    assignee = assignee.lower() or current_user
+    assignee = assignee or current_user
+    assignee = assignee.lower()
 
     # Main filters
     query_to_use = JIRA_QUERY_DEFAULT.format(assignee=assignee)
