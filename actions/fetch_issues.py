@@ -22,9 +22,9 @@ def fetch_issues(
     """Fetch issues based on arguments passed."""
     # Default assignee to current user if not specified
     current_user = jira_client.current_user()
-    assignee = assignee or current_user
+    assignee = assignee.lower() or current_user
 
-    # Build initial query based on assignee
+    # Main filters
     query_to_use = JIRA_QUERY_DEFAULT.format(assignee=assignee)
     if all_issues:
         query_to_use = JIRA_QUERY_ALL.format(assignee=assignee)
@@ -38,6 +38,11 @@ def fetch_issues(
         query_to_use = query_to_use.format(time=time)
     if sort_by_updated:
         query_to_use += JIRA_QUERY_SORTED
+
+    # After query built
+    if assignee == "none":
+        query_to_use = query_to_use.replace("assignee = none AND ", "")
+
     if verbose:
         print(f"\n{BOLD}Query:{RESET_BOLD} {query_to_use}")
 
