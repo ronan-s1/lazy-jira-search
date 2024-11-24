@@ -2,9 +2,9 @@
 A CLI tool to find your Jira tickets faster.
 
 ## Problem Statement
-Sometimes I forget what tickets I have, especially if they're across different boards or lost in the backlog. This tool speeds up this process and helps you find tickets that are assigned to you quickly.
+People often lose track tickets, especially when they're spread across multiple boards or buried in the backlog. This tool simplifies the process, making it easy to quickly find tickets assigned to you or any other ticket.
 
-Also Jira's UI is just painfully slow, lots of clicking around, lots of waiting, lots time wasted and I am lazy so I ain't doin allat. I'm not sure how useful this will even be but shall see.
+TBH, Jira's UI is also painfully slow, with lots licking, waiting which wastes time. This tool removes all that toil.
 
 ## Usage
 By default (passing no arguments), you will see all unresolved Jira issues assigned to you. You can change this behaviour by passing in different arguments shown below.
