@@ -16,13 +16,12 @@ def fetch_issues(
     resolved: bool = False,
     verbose: bool = False,
     all_issues: bool = False,
-    assignee: Optional[str] = None,
-    reporter: Optional[str] = None,
+    assignee: str = None,
+    reporter: str = None,
+    max_results: int = 200,
 ) -> List[Issue]:
     """Fetch issues based on arguments passed."""
     # Default assignee to current user if not specified
-    current_user = jira_client.current_user()
-    assignee = assignee or current_user
     assignee = assignee.lower()
 
     # Main filters
@@ -43,8 +42,8 @@ def fetch_issues(
     # After query built
     if assignee == "none":
         query_to_use = query_to_use.replace("assignee = none AND ", "")
-
     if verbose:
         print(f"\n{BOLD}Query:{RESET_BOLD} {query_to_use}")
 
-    return jira_client.search_issues(query_to_use)
+    print(max_results)
+    return jira_client.search_issues(jql_str=query_to_use, maxResults=max_results)

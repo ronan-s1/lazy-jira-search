@@ -24,6 +24,8 @@ By default (passing no arguments), you will see all unresolved Jira issues assig
 
 `-r, --resolved`: Display issues already resolved.
 
+`-m, --max`: Max amount of issues to fetch (default is 200).
+
 `-v, --verbose`: Enable verbose output.
 
 `-h, --help`: Display usable flags.

@@ -20,6 +20,9 @@ def main() -> None:
     load_dotenv(ENV_FILE_PATH)
     jira_server = os.getenv("JIRA_SERVER")
 
+    # Initialise JIRA client
+    jira_client = get_jira_client(jira_server=jira_server)
+
     # Parse arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--fzf", action="store_true", help="Pipe output to fzf")
@@ -48,26 +51,23 @@ def main() -> None:
         "-as",
         "--assignee",
         type=str,
+        default=jira_client.current_user(),
         help="Specify an assignee username to filter issues assigned to them",
     )
     parser.add_argument(
         "-rep",
         "--reporter",
-        nargs="?",
-        const=True,
+        type=str,
         help="Specify a reporter username to filter issues reported by them; defaults to current user if flag is used without a value",
     )
-    args = parser.parse_args()
-
-    # Initialise JIRA client
-    jira_client = get_jira_client(jira_server=jira_server)
-
-    # Determine reporter value
-    reporter = (
-        args.reporter
-        if isinstance(args.reporter, str)
-        else (jira_client.current_user() if args.reporter else None)
+    parser.add_argument(
+        "-m",
+        "--max",
+        type=int,
+        default=200,
+        help="Specify the max amount of issues to fetch (default is 200)",
     )
+    args = parser.parse_args()
 
     # Fetch issues
     issues = fetch_issues(
@@ -78,7 +78,8 @@ def main() -> None:
         verbose=args.verbose,
         all_issues=args.all,
         assignee=args.assignee,
-        reporter=reporter,
+        reporter=args.reporter,
+        max_results=args.max,
     )
 
     # Display issues or select with fzf
