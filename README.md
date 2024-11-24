@@ -7,7 +7,13 @@ People often lose track tickets, especially when they're spread across multiple 
 TBH, Jira's UI is also painfully slow, with lots licking, waiting which wastes time. This tool removes all that toil.
 
 ## Usage
-By default (passing no arguments), you will see all unresolved Jira issues assigned to you. You can change this behaviour by passing in different arguments shown below.
+By default (passing no arguments), you will see all unresolved Jira issues assigned to you:
+
+```
+assignee = <username> AND resolution = Unresolved
+```
+
+You can change this behaviour by passing in different arguments shown below.
 
 ### Arguments
 `-f, --fzf`: Pipe output to fzf for interactive selection.
@@ -30,8 +36,12 @@ By default (passing no arguments), you will see all unresolved Jira issues assig
 
 `-h, --help`: Display usable flags.
 
-Clicking the issue key or selecting it in fzf view will open it in your browser.
-
+### Note
+- Clicking the issue key or selecting it in fzf view will open it in your browser.
+- Assignee is **always** defaulted to you.
+- Unresolved issues will be fetched unless specified by `--all` or `--resolved` flags.
+- Reported is defaulted to you **only** if flag is specified.
+ 
 ## Example
 The below command will:
 - Find unresolved Jiras assigned to you
@@ -46,7 +56,7 @@ lazy -t 2w -s -f
 It's equivalent to using this JQL query (but without the slowlness of Jira's interface):
 
 ```
-assignee = <your username> AND resolution = Unresolved AND updated >= -2w ORDER BY updated DESC
+assignee = <username> AND resolution = Unresolved AND updated >= -2w ORDER BY updated DESC
 ```
 
 ## Set up
