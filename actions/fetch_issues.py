@@ -45,5 +45,4 @@ def fetch_issues(
     if verbose:
         print(f"\n{BOLD}Query:{RESET_BOLD} {query_to_use}")
 
-    print(max_results)
     return jira_client.search_issues(jql_str=query_to_use, maxResults=max_results)

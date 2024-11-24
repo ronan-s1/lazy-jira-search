@@ -20,7 +20,7 @@ By default (passing no arguments), you will see all unresolved Jira issues assig
 
 `-as, --assignee`: Filter issues by specified assignee.
 
-`-rep, --reporter`: Filter issues by the specified reporter; defaults to you if no value is provided.
+`-rep, --reporter`: Filter issues by the specified reporter; defaults to you if flag is used but no value is provided.
 
 `-r, --resolved`: Display issues already resolved.
 
@@ -30,7 +30,7 @@ By default (passing no arguments), you will see all unresolved Jira issues assig
 
 `-h, --help`: Display usable flags.
 
-Clicking the issue key or selecting it in fzf will open it in your browser
+Clicking the issue key or selecting it in fzf view will open it in your browser.
 
 ## Example
 The below command will:
@@ -41,6 +41,12 @@ The below command will:
 
 ```
 lazy -t 2w -s -f
+```
+
+It's equivalent to using this JQL query (but without the slowlness of Jira's interface):
+
+```
+assignee = <your username> AND resolution = Unresolved AND updated >= -2w ORDER BY updated DESC
 ```
 
 ## Set up
