@@ -21,8 +21,6 @@ def fetch_issues(
     max_results: int = 200,
 ) -> List[Issue]:
     """Fetch issues based on arguments passed."""
-    # Default assignee to current user if not specified
-    assignee = assignee.lower()
 
     # Main filters
     query_to_use = JIRA_QUERY_DEFAULT.format(assignee=assignee)

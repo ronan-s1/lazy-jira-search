@@ -57,8 +57,9 @@ def main() -> None:
     parser.add_argument(
         "-rep",
         "--reporter",
-        type=str,
-        help="Specify a reporter username to filter issues reported by them; defaults to current user if flag is used without a value",
+        nargs="?",
+        const=jira_client.current_user(),
+        help="Specify a reporter username to filter issues reported by them. If used without a value, defaults to the current user.",
     )
     parser.add_argument(
         "-m",
@@ -77,8 +78,8 @@ def main() -> None:
         resolved=args.resolved,
         verbose=args.verbose,
         all_issues=args.all,
-        assignee=args.assignee,
-        reporter=args.reporter,
+        assignee=args.assignee.lower(),
+        reporter=args.reporter.lower() if args.reporter else None,
         max_results=args.max,
     )
 
