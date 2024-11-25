@@ -10,7 +10,7 @@ TBH, Jira's UI is also painfully slow, with lots licking, waiting which wastes t
 By default (passing no arguments), you will see all unresolved Jira issues assigned to you:
 
 ```
-assignee = <username> AND resolution = Unresolved
+assignee = <your username> AND resolution = Unresolved
 ```
 
 You can change this behaviour by passing in different arguments shown below.
@@ -24,7 +24,7 @@ You can change this behaviour by passing in different arguments shown below.
 
 `-s, --sort`: Sort issues by last updated time in descending order.
 
-`-as, --assignee`: Filter issues by specified assignee.
+`-as, --assignee`: Filter issues by specified assignee. Pass "none" to remove assignee filter.
 
 `-rep, --reporter`: Filter issues by the specified reporter; defaults to you if flag is used but no value is provided.
 
@@ -37,12 +37,15 @@ You can change this behaviour by passing in different arguments shown below.
 `-h, --help`: Display usable flags.
 
 ### Note
-- Clicking the issue key or selecting it in fzf view will open it in your browser.
-- Assignee is **always** defaulted to you.
+- You are the assignee unless specified by `--assignee` flag.
 - Unresolved issues will be fetched unless specified by `--all` or `--resolved` flags.
-- Reported is defaulted to you **only** if flag is specified.
- 
-## Example
+- You are the reporter if `--reporter` is used but no value is passed.
+- Passing **"none"** for the assignee will remove the assignee filter entirely.
+- Clicking the issue key or selecting it in fzf view will open it in your browser.
+
+## Examples
+
+### Example 1
 The below command will:
 - Find unresolved Jiras assigned to you
 - Last updated in the last 2 weeks
@@ -56,7 +59,17 @@ lazy -t 2w -s -f
 It's equivalent to using this JQL query (but without the slowlness of Jira's interface):
 
 ```
-assignee = <username> AND resolution = Unresolved AND updated >= -2w ORDER BY updated DESC
+assignee = <your username> AND resolution = Unresolved AND updated >= -2w ORDER BY updated DESC
+```
+
+### Example 2
+
+```bash
+lazy -rep -as none
+```
+
+```
+resolution = Unresolved AND reporter = <your username>
 ```
 
 ## Set up

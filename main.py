@@ -52,7 +52,7 @@ def main() -> None:
         "--assignee",
         type=str,
         default=jira_client.current_user(),
-        help="Specify an assignee username to filter issues assigned to them",
+        help='Specify an assignee username to filter issues assigned to them. Pass "none" to remove assignee filter entirely',
     )
     parser.add_argument(
         "-rep",
