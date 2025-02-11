@@ -36,12 +36,13 @@ You can change this behaviour by passing in different arguments shown below.
 
 `-h, --help`: Display usable flags.
 
-### Note
-- You are the assignee unless specified by `--assignee` flag.
+### NOTE
+- You are always the assignee unless specified by `--assignee` flag.
 - Unresolved issues will be fetched unless specified by `--all` or `--resolved` flags.
 - You are the reporter if `--reporter` is used but no value is passed.
 - Passing **"none"** for the assignee will remove the assignee filter entirely.
 - Clicking the issue key or selecting it in fzf view will open it in your browser.
+- You can hit tab to select multiple issues in `--fzf` mode.
 
 ## Examples
 
